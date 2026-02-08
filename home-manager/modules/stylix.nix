@@ -6,6 +6,8 @@
     jetbrains-mono
     noto-fonts
     noto-fonts-lgc-plus
+    noto-fonts-cjk-serif
+    noto-fonts-cjk-sans
     texlivePackages.hebrew-fonts
     noto-fonts-color-emoji
     font-awesome
