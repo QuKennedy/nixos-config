@@ -4,9 +4,10 @@
     settings = {
       general = {
         disable_loading_bar = true;
-        grace = 10;
+        grace = 7200;
         hide_cursor = true;
         no_fade_in = false;
+        fail_timeout = 0;
       };
 
       label = {
