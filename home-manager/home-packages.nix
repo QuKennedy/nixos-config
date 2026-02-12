@@ -34,6 +34,7 @@
     mediainfo
     microfetch
     playerctl
+    qbittorrent
     ripgrep
     showmethekey
     silicon
