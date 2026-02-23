@@ -132,7 +132,7 @@
         "7, on-created-empty: spotify && brave --app=https://www.youtube.com/"
         "6, on-created-empty: alacritty --working-directory /home/beeper/nixos-config-reborn"
         "4, on-created-empty: alacritty -e v"
-        "3, on-created-empty: brave --app=https://gemini.google.com/app"
+        "2, on-created-empty: brave --app=https://gemini.google.com/app"
         "1, on-created-empty: brave"
         # "special:scratchpad, on-created-empty:alacritty"
       ];
