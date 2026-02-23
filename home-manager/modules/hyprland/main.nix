@@ -25,14 +25,15 @@
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "[workspace special:magic silent] alacritty --working-directory /home/beeper/nixos-config-reborn"
-        "[workspace 10 silent] brave --app=https://messages.google.com/web/conversations"
-        "[workspace 10 silent] vesktop"
-        "[workspace 7 silent] spotify"
-        "[workspace 7 silent] brave --app=https://www.youtube.com/"
-        "[workspace 6 silent] alacritty --working-directory /home/beeper/nixos-config-reborn"
-        "[workspace 4 silent] alacritty -e v"
-        "[workspace 1 silent] brave"
+      # "[workspace special:magic silent] alacritty --working-directory /home/beeper/nixos-config-reborn"
+      # "[workspace 10 silent] brave --app=https://messages.google.com/web/conversations"
+      # "[workspace 10 silent] vesktop"
+      # "[workspace 8 silent] qbittorrent"
+      # "[workspace 7 silent] spotify"
+      # "[workspace 7 silent] brave --app=https://www.youtube.com/"
+      # "[workspace 6 silent] alacritty --working-directory /home/beeper/nixos-config-reborn"
+      # "[workspace 4 silent] alacritty -e v"
+      # "[workspace 1 silent] brave"
       ];
 
       general = {
@@ -108,6 +109,7 @@
         # "workspace 3,class:(obsidian)"
         # TODO set up vencord
         "workspace 7,class:(spotify)"
+        "workspace 8,class:(qbittorrent)"
         "workspace 10,class:(vesktop)"
 
         "suppressevent maximize, class:.*"
@@ -122,8 +124,16 @@
       ];
 
       workspace = [
-        "w[tv1], gapsout:0, gapsin:0"
-        "f[1], gapsout:0, gapsin:0"
+        # "w[tv1], gapsout:0, gapsin:0"
+        # "f[1], gapsout:0, gapsin:0"
+        "special:magic, on-created-empty: alacritty --working-directory /home/beeper/nixos-config-reborn"
+        "10, on-created-empty: brave --app=https://messages.google.com/web/conversations && vesktop"
+        "8, on-created-empty: qbittorrent"
+        "7, on-created-empty: spotify && brave --app=https://www.youtube.com/"
+        "6, on-created-empty: alacritty --working-directory /home/beeper/nixos-config-reborn"
+        "4, on-created-empty: alacritty -e v"
+        "3, on-created-empty: brave --app=https://gemini.google.com/app"
+        "1, on-created-empty: brave"
         # "special:scratchpad, on-created-empty:alacritty"
       ];
     };
