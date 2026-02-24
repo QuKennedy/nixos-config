@@ -128,6 +128,7 @@
         # "f[1], gapsout:0, gapsin:0"
         "special:magic, on-created-empty: alacritty --working-directory /home/beeper/nixos-config-reborn"
         "10, on-created-empty: brave --app=https://messages.google.com/web/conversations && vesktop"
+        "9, on-created-empty: brave --app=https://calendar.google.com/calendar/u/0/r"
         "8, on-created-empty: qbittorrent"
         "7, on-created-empty: spotify && brave --app=https://www.youtube.com/"
         "6, on-created-empty: alacritty --working-directory /home/beeper/nixos-config-reborn"
