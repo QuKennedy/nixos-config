@@ -7,6 +7,7 @@
     # Desktop apps
     anki
     # code-cursor
+    vscode-fhs
     imv
     mpv
     #obs-studio
@@ -14,6 +15,7 @@
     #teams-for-linux
     #telegram-desktop
     vesktop
+    nautilus
 
     # CLI utils
     grim

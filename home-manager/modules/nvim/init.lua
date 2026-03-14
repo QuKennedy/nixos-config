@@ -1,4 +1,4 @@
--- NOTE: These 2 need to be set up before any plugins are loaded.
+init.-- NOTE: These 2 need to be set up before any plugins are loaded.
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -166,8 +166,8 @@ require("snacks").setup({
 				layout = {
 					layout = {
 						-- > 1 for absolute columns, 0 to 1 for percentage
-						width = 90,
-						min_width = 90,
+						width = 60,
+						min_width = 60,
 					},
 				},
 			},
