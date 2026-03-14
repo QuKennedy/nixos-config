@@ -153,8 +153,26 @@ vim.keymap.set(
 -- vim.cmd.colorscheme('onedark')
 vim.cmd.colorscheme("catppuccin-mocha")
 require("snacks").setup({
-	explorer = {},
-	picker = {},
+	explorer = {
+		win = {
+			sidebar = {
+				width = 60, -- Set your desired width here
+			},
+		},
+	},
+	picker = {
+		sources = {
+			explorer = {
+				layout = {
+					layout = {
+						-- > 1 for absolute columns, 0 to 1 for percentage
+						width = 90,
+						min_width = 90,
+					},
+				},
+			},
+		},
+	},
 	bigfile = {},
 	image = {},
 	lazygit = {},
@@ -787,7 +805,7 @@ require("lze").load({
 		enabled = nixCats("general") or false,
 		lsp = {
 			filetypes = { "python" },
-			capabilities = require('blink.cmp').get_lsp_capabilities(),
+			capabilities = require("blink.cmp").get_lsp_capabilities(),
 			settings = {
 				basedpyright = {
 					analysis = {
@@ -874,4 +892,13 @@ require("lze").load({
 			},
 		},
 	},
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		-- Only open if Neovim is started without a file argument
+		if vim.fn.argc() == 0 then
+			require("snacks").explorer.open()
+		end
+	end,
 })
