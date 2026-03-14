@@ -38,6 +38,8 @@ in {
         lspsAndRuntimeDeps = {
           general = with pkgs; [
             lazygit
+            ruff
+            basedpyright
           ];
           lua = with pkgs; [
             lua-language-server
