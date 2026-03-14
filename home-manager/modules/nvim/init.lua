@@ -549,7 +549,8 @@ require("lze").load({
 				formatters_by_ft = {
 					-- NOTE: download some formatters in lspsAndRuntimeDeps
 					-- and configure them here
-					python = { "ruff_format" },
+					-- python = { "ruff_format" },
+					python = { "ruff" },
 					lua = nixCats("lua") and { "stylua" } or nil,
 					go = nixCats("go") and { "gofmt", "golint" } or nil,
 					-- templ = { "templ" },
@@ -786,6 +787,7 @@ require("lze").load({
 		enabled = nixCats("general") or false,
 		lsp = {
 			filetypes = { "python" },
+			capabilities = require('blink.cmp').get_lsp_capabilities(),
 			settings = {
 				basedpyright = {
 					analysis = {
