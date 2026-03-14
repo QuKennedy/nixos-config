@@ -108,6 +108,18 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- Normal Mode: Toggle line comment
+vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("n", "<C-_>", "gcc", { remap = true, desc = "Toggle comment" })
+
+-- Visual Mode: Toggle comment on selection
+vim.keymap.set("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("v", "<C-_>", "gc", { remap = true, desc = "Toggle comment" })
+
+-- Insert Mode: Toggle comment and stay in insert (if you want that)
+vim.keymap.set("i", "<C-/>", "<esc>gcci", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("i", "<C-_>", "<esc>gcci", { remap = true, desc = "Toggle comment" })
+
 -- kickstart.nvim starts you with this. 
 -- But it constantly clobbers your system clipboard whenever you delete anything.
 
