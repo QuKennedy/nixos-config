@@ -13,6 +13,7 @@
     # ./neovim.nix
     ./nvim
     ./ranger.nix
+    ./redshift.nix
     ./spicetify.nix
     ./starship.nix
     ./stylix.nix
