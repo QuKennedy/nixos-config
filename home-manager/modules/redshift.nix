@@ -1,6 +1,6 @@
 {
 services.redshift = {
-  enable = true;
+  enable = false;
       latitude = "40.680779";
       longitude = "73.9750141";
       settings.redshift = {

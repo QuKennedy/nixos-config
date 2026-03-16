@@ -7,6 +7,7 @@
     ./eza.nix
     ./fzf.nix
     ./git.nix
+    ./gammastep.nix
     ./hyprland
     ./lazygit.nix
     # See comment in neovim.nix file, this is no longer used but kept for now.
