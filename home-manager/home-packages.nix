@@ -1,5 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ inputs.claude-code.overlays.default ];  # <- add overlay
+
 
   home.packages = with pkgs; [
     # Packages in each category are sorted alphabetically
@@ -16,6 +18,7 @@
     #telegram-desktop
     vesktop
     nautilus
+    claude-code
 
     # CLI utils
     grim

@@ -8,6 +8,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     catppuccin.url = "github:catppuccin/nix";
+    claude-code.url = "github:sadjow/claude-code-nix";
     # TODO: add the jb in here like that github search result.
 
     home-manager = {
