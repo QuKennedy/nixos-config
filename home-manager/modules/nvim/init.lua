@@ -50,7 +50,7 @@ vim.o.smartcase = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = "yes"
-vim.wo.relativenumber = true
+vim.wo.relativenumber = false
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -95,10 +95,17 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll Up" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next Search Result" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous Search Result" })
 
-vim.keymap.set("n", "<leader><leader>[", "<cmd>bprev<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader><leader>]", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<C-S-Tab>", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<C-Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+-- vim.keymap.set("n", "<leader><leader>[", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+-- vim.keymap.set("n", "<leader><leader>]", "<cmd>bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader><leader>l", "<cmd>b#<CR>", { desc = "Last buffer" })
 vim.keymap.set("n", "<leader><leader>d", "<cmd>bdelete<CR>", { desc = "delete buffer" })
+
+-- Jump to previous cursor location (Jumplist)
+vim.keymap.set("n", "<C-m>", "<C-o>", { desc = "Jump to previous location" })
+-- Jump to next cursor location (Jumplist)
+vim.keymap.set("n", "<C-,>", "<C-i>", { desc = "Jump to next location" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -894,11 +901,42 @@ require("lze").load({
 	},
 })
 
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	callback = function()
+-- 		-- Only open if Neovim is started without a file argument
+-- 		if vim.fn.argc() == 0 then
+-- 			require("snacks").explorer.open()
+-- 		end
+-- 	end,
+-- })
 vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		-- Only open if Neovim is started without a file argument
-		if vim.fn.argc() == 0 then
-			require("snacks").explorer.open()
-		end
-	end,
+    callback = function()
+        -- 'enter = false' tells the picker to open but not "enter" the window
+        require("snacks").explorer.open({ enter = false })
+    end,
 })
+-- vim.api.nvim_create_autocmd({ "VimResized", "VimEnter" }, {
+--     callback = function()
+--         -- Set your threshold (e.g., 100 columns)
+--         local threshold = 100
+--         local current_width = vim.o.columns
+--         local explorer_open = false
+--
+--         -- Check if explorer is currently open
+--         for _, win in ipairs(vim.api.nvim_list_wins()) do
+--             local buf = vim.api.nvim_win_get_buf(win)
+--             if vim.bo[buf].filetype == "snacks_explorer" then
+--                 explorer_open = true
+--                 break
+--             end
+--         end
+--
+--         -- Close if screen is too small; open if screen is large enough
+--         if current_width < threshold and explorer_open then
+--             require("snacks").explorer.close()
+--         elseif current_width >= threshold and not explorer_open then
+--             -- Use 'enter = false' to ensure focus stays in your code
+--             require("snacks").explorer.open({ enter = false })
+--         end
+--     end,
+-- })
