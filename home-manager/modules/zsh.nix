@@ -7,9 +7,9 @@
 
     shellAliases =
       let
-        nixDir = "~/nixos-config-reborn";
+        nixDir = "~/nixos-config";
         flakeDir = "~/flake";
-	modulesDir = "~/nixos-config-reborn/home-manager/modules";
+	modulesDir = "~/nixos-config/home-manager/modules";
       in {
         dj = "cd ${nixDir}" ;
         lss = "ls -lhA --color";
@@ -53,6 +53,11 @@
         fi
       }
       zle -N zle-keymap-select
+
+      function zle-line-init {
+        echo -ne '\e[5 q'  # beam on each new prompt
+      }
+      zle -N zle-line-init
       echo -ne '\e[5 q'  # beam on startup
 
     # TODO: if enabling tmux also re enable this

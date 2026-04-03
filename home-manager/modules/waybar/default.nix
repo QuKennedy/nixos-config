@@ -116,7 +116,7 @@
               warning = 70;
               critical = 90;
           };
-	  on-click = "$HOME/nixos-config-reborn/scripts/screenshot.sh";
+	  on-click = "$HOME/nixos-config/scripts/screenshot.sh";
         };
 
         "battery" = {
