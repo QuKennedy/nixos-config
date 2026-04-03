@@ -41,6 +41,20 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
 
     initExtra = ''
+      KEYTIMEOUT=1
+      bindkey -M viins '^?' backward-delete-char
+      bindkey -M viins '^H' backward-delete-char
+
+      function zle-keymap-select {
+        if [[ $KEYMAP == vicmd ]]; then
+          echo -ne '\e[1 q'  # block
+        else
+          echo -ne '\e[5 q'  # beam
+        fi
+      }
+      zle -N zle-keymap-select
+      echo -ne '\e[5 q'  # beam on startup
+
     # TODO: if enabling tmux also re enable this
       # Start Tmux automatically if not already running. No Tmux in TTY
       # if [ -z "$TMUX" ] && [ -n "$DISPLAY" ]; then

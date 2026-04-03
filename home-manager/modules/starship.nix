@@ -9,10 +9,6 @@
         format = "[$ssh_symbol$hostname]($style) ";
         style = "bold purple";
       };
-      character = {
-        success_symbol = "[ & ](bold green)";
-        error_symbol = "[ & ](bold red)";
-      };
       username = {
         show_always = true;
         format = "[$user]($style)@";
