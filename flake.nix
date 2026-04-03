@@ -4,11 +4,14 @@
   inputs = {
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    # Should this be also 25.11 version of unstable?
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixCats.url = "github:BirdeeHub/nixCats-nvim";
-    catppuccin.url = "github:catppuccin/nix";
-    claude-code.url = "github:sadjow/claude-code-nix";
+    nixCats = {
+      url = "github:BirdeeHub/nixCats-nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # TODO: add the jb in here like that github search result.
 
     home-manager = {
@@ -28,26 +31,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      # TODO: understand this, bc https://github.com/search?q=repo%3AOahzEgroeg%2Fnixos-config%20hyprland.nixosModules.default&type=code didn't help.
-      # Requires "hyprland.nixosModules.default" to be added the host modules
-    };
+    hyprland.url = "github:hyprwm/Hyprland";
 
     hyprlock = {
       url = "github:hyprwm/hyprlock";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
 
     hypridle = {
       url = "github:hyprwm/hypridle";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
 
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
   };
 
@@ -55,29 +53,19 @@
     system = "x86_64-linux";
     homeStateVersion = "25.11";
     user = "beeper";
-    hosts = [
-      { hostname = "beepstation"; stateVersion = "25.11"; }
-    ];
-
-    makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
+  in {
+    nixosConfigurations.beepstation = nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = {
-        inherit inputs stateVersion hostname user homeStateVersion;
+        inherit inputs user homeStateVersion;
+        stateVersion = "25.11";
+        hostname = "beepstation";
       };
-
       modules = [
-        ./hosts/${hostname}/configuration.nix
+        ./hosts/beepstation/configuration.nix
         # https://journix.dev/posts/ricing-linux-has-never-been-easier-nixos-and-stylix/
         # TODO: maybe do stylix here?
       ];
     };
-
-  in {
-    nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
-      configs // {
-        "${host.hostname}" = makeSystem {
-          inherit (host) hostname stateVersion;
-        };
-      }) {} hosts;
   };
 }
