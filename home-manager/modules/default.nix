@@ -10,11 +10,8 @@
     ./gammastep.nix
     ./hyprland
     ./lazygit.nix
-    # See comment in neovim.nix file, this is no longer used but kept for now.
-    # ./neovim.nix
     ./nvim
     ./ranger.nix
-    ./redshift.nix
     ./spicetify.nix
     ./starship.nix
     ./stylix.nix

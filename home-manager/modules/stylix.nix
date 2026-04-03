@@ -30,7 +30,7 @@
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     targets = {
       waybar.enable = false;
-      wofi.enable = false;
+      wofi.enable = true;
       hyprland.enable = false;
       hyprlock.enable = false;
     };

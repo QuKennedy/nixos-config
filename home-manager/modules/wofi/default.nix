@@ -4,10 +4,10 @@
     settings = {
       allow_markup = true;
       allow_images = true;
-      width = 350;
-      height = 450;
+      width = 1050;
+      height = 675;
     };
   };
 
-  home.file.".config/wofi/style.css".source = ./style.css;
+  # home.file.".config/wofi/style.css".source = ./style.css;
 }

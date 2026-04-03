@@ -52,6 +52,8 @@
           tooltip = false;
         };
 
+        # TODO: weather script broken — "render failed: response missing current_condition array"
+        # wttr.in API may be flaky or the format string is hitting a different endpoint; investigate and add error handling
         "custom/weather" = {
           format = " {} ";
           exec = "curl -s 'wttr.in/Brooklyn,NY?format=%c%t'";

@@ -1,3 +1,5 @@
+# TODO: remove all locking on idle — no hyprlock, no loginctl lock-session. monitor sleep only.
+# TODO: monitor takes ~10s to wake from dpms off — investigate faster resume (wlr-randr? hyprland dpms quirk?)
 {
   services.hypridle = {
     enable = true;
@@ -26,7 +28,7 @@
         }
         {
           timeout = 1200;
-          on-timeout = "sysemctl suspend";
+          on-timeout = "sysemctl suspend"; # typo: systemctl
         }
       ];
     };
