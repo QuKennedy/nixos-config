@@ -51,7 +51,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+  outputs = { self, nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
     homeStateVersion = "25.11";
     user = "beeper";
@@ -62,7 +62,7 @@
     makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = {
-        inherit inputs stateVersion hostname user;
+        inherit inputs stateVersion hostname user homeStateVersion;
       };
 
       modules = [
@@ -79,16 +79,5 @@
           inherit (host) hostname stateVersion;
         };
       }) {} hosts;
-
-    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = {
-        inherit inputs homeStateVersion user;
-      };
-
-      modules = [
-        ./home-manager/home.nix
-      ];
-    };
   };
 }
