@@ -3,6 +3,7 @@
     enable = true;
     settings = {
       window.opacity = 1.0;
+      window.padding = { x = 8; y = 8; };
 
       font = {
         # defined in stylix
