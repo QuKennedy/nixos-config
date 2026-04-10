@@ -75,7 +75,7 @@
         kb_options = "";
 	repeat_delay = 220;
 	repeat_rate = 50;
-        follow_mouse = 0;
+        follow_mouse = 1;
       };
 
       #gestures = {
