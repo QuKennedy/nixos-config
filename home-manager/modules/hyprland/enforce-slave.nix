@@ -1,21 +1,52 @@
 { pkgs, ... }:
 let
     enforce-slave = pkgs.writeShellScript "enforce-slave" ''
-        socket="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
-        ${pkgs.socat}/bin/socat - "UNIX-CONNECT:$socket" | while IFS= read -r event; do
-            if [[ "$event" == openwindow* ]]; then
-                # event format: openwindow>>address,workspacename,class,title
-                ws_name=$(echo "$event" | cut -d',' -f2)
-                clients=$(${pkgs.hyprland}/bin/hyprctl clients -j 2>/dev/null)
-                claude_address=$(echo "$clients" | ${pkgs.jq}/bin/jq -r --arg ws "$ws_name" \
-                    '.[] | select(.class == "claude-term" and .workspace.name == $ws and .master == true) | .address')
-                if [[ -n "$claude_address" ]]; then
-                    new_address=$(echo "$event" | cut -d'>' -f3 | cut -d',' -f1)
-                    ${pkgs.hyprland}/bin/hyprctl dispatch focuswindow "address:$claude_address"
-                    ${pkgs.hyprland}/bin/hyprctl dispatch layoutmsg slave
-                    ${pkgs.hyprland}/bin/hyprctl dispatch focuswindow "address:$new_address"
-                fi
+        find_socket() {
+            local dir="/run/user/$UID/hypr"
+            if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+                echo "$dir/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+            else
+                local instance
+                instance=$(ls "$dir" 2>/dev/null | head -1)
+                [[ -n "$instance" ]] && echo "$dir/$instance/.socket2.sock"
             fi
+        }
+
+        while true; do
+            socket=$(find_socket)
+            if [[ -z "$socket" || ! -S "$socket" ]]; then
+                sleep 2
+                continue
+            fi
+
+            ${pkgs.socat}/bin/socat -u "UNIX-CONNECT:$socket" - 2>/dev/null | while IFS= read -r event; do
+                [[ "$event" != openwindow* ]] && continue
+
+                echo "[enforce-slave] event: $event" >> /tmp/enforce-slave.log
+
+                # event format: openwindow>>address,workspacename,class,title
+                IFS=',' read -r new_addr ws_name rest <<< "''${event#*>>}"
+
+                echo "[enforce-slave] new_addr=$new_addr ws_name=$ws_name" >> /tmp/enforce-slave.log
+
+                clients=$(${pkgs.hyprland}/bin/hyprctl clients -j 2>/dev/null)
+
+                # master = leftmost window (smallest x) on the workspace
+                claude_x=$(echo "$clients" | ${pkgs.jq}/bin/jq -r --arg ws "$ws_name" \
+                    '.[] | select(.class == "claude-term" and .workspace.name == $ws) | .at[0]')
+                min_x=$(echo "$clients" | ${pkgs.jq}/bin/jq -r --arg ws "$ws_name" \
+                    '[.[] | select(.workspace.name == $ws) | .at[0]] | min')
+
+                echo "[enforce-slave] claude_x=$claude_x min_x=$min_x" >> /tmp/enforce-slave.log
+
+                if [[ -n "$claude_x" && "$claude_x" == "$min_x" ]]; then
+                    ${pkgs.hyprland}/bin/hyprctl --batch \
+                        "dispatch focuswindow address:$new_addr ; dispatch layoutmsg swapwithmaster"
+                    echo "[enforce-slave] swapped" >> /tmp/enforce-slave.log
+                fi
+            done
+
+            sleep 1
         done
     '';
 in
@@ -27,8 +58,7 @@ in
         };
         Service = {
             ExecStart = "${enforce-slave}";
-            Restart = "always";
-            RestartSec = 3;
+            Restart = "on-failure";
         };
         Install.WantedBy = [ "hyprland-session.target" ];
     };
