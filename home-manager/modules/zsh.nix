@@ -4,6 +4,10 @@
         enable = true;
         enableCompletion = true;
         autosuggestion.enable = true;
+        # TODO: switch to zsh-fast-syntax-highlighting for faster startup
+        # Blocked on: compinit insecure directories prompt from nix store paths,
+        # and home-manager not supporting compinit -u natively.
+        # See: github.com/nix-community/home-manager/issues/7474
         syntaxHighlighting.enable = true;
 
         shellAliases =
