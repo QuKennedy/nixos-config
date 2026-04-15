@@ -1,33 +1,36 @@
-{ config, pkgs, lib, ... }:
-
 {
-  programs.btop = {
-    enable = true;
-    package = pkgs.btop.override { rocmSupport = true; };
-    settings = {
-      # --- Layout ---
-      shown_boxes = "cpu gpu0 mem proc";
+    config,
+    pkgs,
+    lib,
+    ...
+}:
+{
+    programs.btop = {
+        enable = true;
+        package = pkgs.btop.override { rocmSupport = true; };
+        settings = {
+            # --- Layout ---
+            shown_boxes = "cpu gpu0 mem proc";
 
-      # --- GPU ---
-      show_gpu = true;
-      gpu_graph = true;
-      gpu_mem_graph = true;
-      gpu_mem_percent = true;
-      gpu_name = true;
-      gpu_power = true;
-      gpu_temp = true;
-      gpu_freq = true;
+            # --- GPU ---
+            show_gpu = true;
+            gpu_graph = true;
+            gpu_mem_graph = true;
+            gpu_mem_percent = true;
+            gpu_name = true;
+            gpu_power = true;
+            gpu_temp = true;
+            gpu_freq = true;
 
-      # --- General ---
-      vim_keys = true;
-      # theme_background = false;
-      # rounded_corners = true;
-      # update_ms = 1000;
+            # --- General ---
+            vim_keys = true;
+            # theme_background = false;
+            # rounded_corners = true;
+            # update_ms = 1000;
 
-      # --- Process ---
-      # proc_tree = true;
-      # proc_sorting = "cpu lazy";
+            # --- Process ---
+            # proc_tree = true;
+            # proc_sorting = "cpu lazy";
+        };
     };
-  };
 }
-

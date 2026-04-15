@@ -1,5 +1,5 @@
 {
-  xdg.mime.defaultApplications = {
-    "inode/directory" = "ranger";
-  };
+    xdg.mime.defaultApplications = {
+        "inode/directory" = "ranger";
+    };
 }

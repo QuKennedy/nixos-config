@@ -1,16 +1,19 @@
-{ pkgs, stateVersion, hostname, ... }:
-
 {
-  imports = [
-    ./hardware-configuration.nix
-    ./local-packages.nix
-    ../../nixos/modules
-  ];
+    pkgs,
+    stateVersion,
+    hostname,
+    ...
+}:
+{
+    imports = [
+        ./hardware-configuration.nix
+        ./local-packages.nix
+        ../../nixos/modules
+    ];
 
-  nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = hostname;
+    networking.hostName = hostname;
 
-  system.stateVersion = stateVersion;
+    system.stateVersion = stateVersion;
 }
-

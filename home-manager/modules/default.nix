@@ -1,25 +1,25 @@
 {
-  imports = [
-    ./alacritty.nix
-    ./bat.nix
-    ./btop.nix
-    ./chromium.nix
-    ./eza.nix
-    ./fzf.nix
-    ./git.nix
-    ./gammastep.nix
-    ./hyprland
-    ./lazygit.nix
-    ./nvim
-    ./ranger.nix
-    ./spicetify.nix
-    ./starship.nix
-    ./stylix.nix
-    ./swaync
-    ./tmux.nix
-    ./waybar
-    ./wofi
-    ./zathura.nix
-    ./zsh.nix
-  ];
+    imports = [
+        ./alacritty.nix
+        ./bat.nix
+        ./btop.nix
+        ./chromium.nix
+        ./eza.nix
+        ./fzf.nix
+        ./git.nix
+        ./gammastep.nix
+        ./hyprland
+        ./lazygit.nix
+        ./nvim
+        ./ranger.nix
+        ./spicetify.nix
+        ./starship.nix
+        ./stylix.nix
+        ./swaync
+        ./tmux.nix
+        ./waybar
+        ./wofi
+        ./zathura.nix
+        ./zsh.nix
+    ];
 }

@@ -1,20 +1,20 @@
 {
-  imports = [
-    ./audio.nix
-    ./bluetooth.nix
-    ./boot.nix
-    ./env.nix
-    ./fonts.nix
-    ./home-manager.nix
-    ./hyprland.nix
-    ./kernel.nix
-    ./mime.nix
-    ./net.nix
-    ./nh.nix
-    ./nix.nix
-    ./steam.nix
-    ./timezone.nix
-    ./user.nix
-    ./zram.nix
-  ];
+    imports = [
+        ./audio.nix
+        ./bluetooth.nix
+        ./boot.nix
+        ./env.nix
+        ./fonts.nix
+        ./home-manager.nix
+        ./hyprland.nix
+        ./kernel.nix
+        ./mime.nix
+        ./net.nix
+        ./nh.nix
+        ./nix.nix
+        ./steam.nix
+        ./timezone.nix
+        ./user.nix
+        ./zram.nix
+    ];
 }

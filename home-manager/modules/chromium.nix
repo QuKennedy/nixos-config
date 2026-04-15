@@ -1,22 +1,23 @@
-{ pkgs, ... }: {
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
-    extensions = [
-      # Vimium
-      { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; }
+{ pkgs, ... }:
+{
+    programs.chromium = {
+        enable = true;
+        package = pkgs.brave;
+        extensions = [
+            # Vimium
+            { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; }
 
-      # Return YouTube Dislike
-      { id = "gebbhagfogifgggkldgodflihgfeippi"; }
+            # Return YouTube Dislike
+            { id = "gebbhagfogifgggkldgodflihgfeippi"; }
 
-      # LastPass
-      { id = "hdokiejnpimakedhajhdlcegeplioahd"; }
+            # LastPass
+            { id = "hdokiejnpimakedhajhdlcegeplioahd"; }
 
-      # Hover Zoom+
-      { id = "pccckmaobkjjboncdfnnofkonhgpceea"; }
+            # Hover Zoom+
+            { id = "pccckmaobkjjboncdfnnofkonhgpceea"; }
 
-      # Video Speed Controller
-      { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; }
-    ];
-  };
+            # Video Speed Controller
+            { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; }
+        ];
+    };
 }
