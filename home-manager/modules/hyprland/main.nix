@@ -134,7 +134,7 @@
                 "8, on-created-empty: qbittorrent"
                 "7, on-created-empty: spotify && brave --app=https://www.youtube.com/"
                 "6, on-created-empty: alacritty --working-directory /home/beeper/nixos-config"
-                "4, on-created-empty: alacritty -e v"
+                "4, on-created-empty: alacritty -e v & sleep 1 && alacritty --class claude-term -e claude"
                 "3, on-created-empty: nautilus"
                 "2, on-created-empty: brave --app=https://claude.ai/chat"
                 "1, on-created-empty: brave"

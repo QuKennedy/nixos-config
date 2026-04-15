@@ -2,6 +2,33 @@ vim.keymap.set("n", "-", function()
     Snacks.explorer.open()
 end, { desc = "Snacks Explorer" })
 
+-- Toggle bottom terminal
+vim.keymap.set({ "n", "t" }, "<C-l>", function()
+    Snacks.terminal.toggle(nil, { win = { position = "bottom", height = 0.3 } })
+end, { desc = "Toggle terminal" })
+
+-- Run current file in a bottom terminal
+local function run_cmd(cmd)
+    return string.format("bash -c '%s; echo; echo [exited]; read'", cmd)
+end
+
+local runners = {
+    go = function()
+        return run_cmd("go run " .. vim.fn.expand("%:p"))
+    end,
+    python = function()
+        return run_cmd("python " .. vim.fn.expand("%:p"))
+    end,
+}
+vim.keymap.set("n", "<leader>x", function()
+    local runner = runners[vim.bo.filetype]
+    if runner then
+        Snacks.terminal.open(runner(), { win = { position = "bottom", height = 0.3 } })
+    else
+        vim.notify("No runner configured for filetype: " .. vim.bo.filetype, vim.log.levels.WARN)
+    end
+end, { desc = "Run file" })
+
 -- TODO: make this keybind something maybe like leader t if that's not some easymotion
 vim.keymap.set("n", "<c-\\>", function()
     Snacks.terminal.open()

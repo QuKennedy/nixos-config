@@ -18,5 +18,17 @@
         };
     };
 
+    security.sudo.extraRules = [
+        {
+            users = [ user ];
+            commands = [
+                {
+                    command = "/run/current-system/sw/bin/nh";
+                    options = [ "NOPASSWD" ];
+                }
+            ];
+        }
+    ];
+
     services.getty.autologinUser = user;
 }

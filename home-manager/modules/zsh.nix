@@ -22,6 +22,7 @@
                 vbar = "v ${modulesDir}/waybar/default.nix";
                 pkgs = "v ${flakeDir}/nixos/packages.nix";
                 vflake = "v ${flakeDir}/nixos/flake.nix";
+                ca = "alacritty --class claude-term -e claude";
                 sw = "nh os switch";
                 upd = "nh os switch --update";
                 hms = "nh home switch";
